@@ -98,9 +98,45 @@ public class DataImplementation implements CommandLineRunner {
         gobletOfFire.getAuthors().add(jkrowling);
         bloomsbury.getBooks().add(gobletOfFire);
 
-//        authorRepository.save(jkrowling);
+        // authorRepository.save(jkrowling);
         bookRepository.save(gobletOfFire);
         publisherRepository.save(bloomsbury);
+
+        /*
+        1. add book to the authors ...
+        2. author to the book ...
+        3. book to the publisher ...
+        save to the h2 database
+        */
+        Author suntzu = new Author("Sun", "Tzu");
+        Book artOfWar = new Book("Art of War", "1599869772");
+        Publisher filiquarian = new Publisher();
+        filiquarian.setName("Filiquarian");
+        suntzu.getBooks().add(artOfWar);
+        artOfWar.getAuthors().add(suntzu);
+        filiquarian.getBooks().add(artOfWar);
+
+        authorRepository.save(suntzu);
+        bookRepository.save(artOfWar);
+        publisherRepository.save(filiquarian);
+
+        /*
+        1. add book to the authors ...
+        2. author to the book ...
+        3. book to the publisher ...
+        save to the h2 database
+        */
+        Publisher penguinPublishingGroup = new Publisher();
+        penguinPublishingGroup.setName("Penguin Publishing Group");
+        Author robertGreene = new Author("Robert", "Greene");
+        Book the48LawsOfPower = new Book("The 48 Laws of Power", "0140280197");
+        robertGreene.getBooks().add(the48LawsOfPower);
+        the48LawsOfPower.getAuthors().add(robertGreene);
+        penguinPublishingGroup.getBooks().add(the48LawsOfPower);
+
+         authorRepository.save(robertGreene);
+        bookRepository.save(the48LawsOfPower);
+        publisherRepository.save(penguinPublishingGroup);
 
 
         System.out.println("No. of Publishers: " + publisherRepository.count());
